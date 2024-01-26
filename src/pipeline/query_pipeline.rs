@@ -600,6 +600,7 @@ impl QueryPipeline {
         colliders: &ColliderSet,
         point: &Point<Real>,
         filter: QueryFilter,
+        stack: &mut Vec<u32>,
         mut callback: impl FnMut(ColliderHandle) -> bool,
     ) {
         let mut leaf_callback = &mut |handle: &ColliderHandle| {
@@ -614,7 +615,8 @@ impl QueryPipeline {
 
         let mut visitor = PointIntersectionsVisitor::new(point, &mut leaf_callback);
 
-        self.qbvh.traverse_depth_first(&mut visitor);
+        self.qbvh
+            .traverse_depth_first_node_with_stack(&mut visitor, stack, 0);
     }
 
     /// Find the projection of a point on the closest collider.
