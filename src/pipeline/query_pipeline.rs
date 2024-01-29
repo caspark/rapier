@@ -600,6 +600,33 @@ impl QueryPipeline {
         colliders: &ColliderSet,
         point: &Point<Real>,
         filter: QueryFilter,
+        callback: impl FnMut(ColliderHandle) -> bool,
+    ) {
+        self.intersections_with_point_using_stack(
+            bodies,
+            colliders,
+            point,
+            filter,
+            &mut Vec::new(),
+            callback,
+        )
+    }
+
+    /// Find all the colliders containing the given point.
+    ///
+    /// # Parameters
+    /// * `colliders` - The set of colliders taking part in this pipeline.
+    /// * `point` - The point used for the containment test.
+    /// * `filter`: set of rules used to determine which collider is taken into account by this scene query.
+    /// * `stack`: a workspace used for traversal. This should be an empty `Vec<u32>`.
+    /// * `callback` - A function called with each collider with a shape
+    ///                containing the `point`.
+    pub fn intersections_with_point_using_stack(
+        &self,
+        bodies: &RigidBodySet,
+        colliders: &ColliderSet,
+        point: &Point<Real>,
+        filter: QueryFilter,
         stack: &mut Vec<u32>,
         mut callback: impl FnMut(ColliderHandle) -> bool,
     ) {
