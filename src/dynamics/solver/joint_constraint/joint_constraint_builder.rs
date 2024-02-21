@@ -18,6 +18,7 @@ use crate::utils::SimdBasis;
 #[cfg(feature = "simd-is-enabled")]
 use crate::math::{SimdReal, SIMD_WIDTH};
 
+#[derive(Clone)]
 pub struct JointTwoBodyConstraintBuilder {
     body1: usize,
     body2: usize,
@@ -89,6 +90,7 @@ impl JointTwoBodyConstraintBuilder {
 }
 
 #[cfg(feature = "simd-is-enabled")]
+#[derive(Clone)]
 pub struct JointTwoBodyConstraintBuilderSimd {
     body1: [usize; SIMD_WIDTH],
     body2: [usize; SIMD_WIDTH],
@@ -174,6 +176,7 @@ impl JointTwoBodyConstraintBuilderSimd {
     }
 }
 
+#[derive(Clone)]
 pub struct JointOneBodyConstraintBuilder {
     body1: JointFixedSolverBody<Real>,
     frame1: Isometry<Real>,
@@ -257,6 +260,7 @@ impl JointOneBodyConstraintBuilder {
 }
 
 #[cfg(feature = "simd-is-enabled")]
+#[derive(Clone)]
 pub struct JointOneBodyConstraintBuilderSimd {
     body1: JointFixedSolverBody<SimdReal>,
     frame1: Isometry<SimdReal>,

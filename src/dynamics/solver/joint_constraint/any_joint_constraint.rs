@@ -24,7 +24,7 @@ use crate::{
 use crate::dynamics::solver::joint_constraint::joint_constraint_builder::{
     JointOneBodyConstraintBuilder, JointTwoBodyConstraintBuilder,
 };
-
+#[derive(Clone, Copy)]
 pub struct JointConstraintTypes;
 
 impl<'a> AnyConstraintMut<'a, JointConstraintTypes> {

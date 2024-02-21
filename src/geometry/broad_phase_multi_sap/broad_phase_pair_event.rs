@@ -40,6 +40,7 @@ impl Default for ColliderPair {
 }
 
 /// An event emitted by the broad-phase.
+#[derive(Clone, Copy)]
 pub enum BroadPhasePairEvent {
     /// A potential new collision pair has been detected by the broad-phase.
     AddPair(ColliderPair),

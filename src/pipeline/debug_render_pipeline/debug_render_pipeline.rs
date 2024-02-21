@@ -47,6 +47,7 @@ type InstancesMap = HashMap<TypeId, Vec<Point<Real>>>;
 #[cfg(feature = "dim3")]
 type InstancesMap = HashMap<TypeId, (Vec<Point<Real>>, Vec<[u32; 2]>)>;
 
+#[derive(Clone)]
 /// Pipeline responsible for rendering the state of the physics engine for debugging purpose.
 pub struct DebugRenderPipeline {
     #[cfg(feature = "dim2")]
